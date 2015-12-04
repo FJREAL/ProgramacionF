@@ -1,0 +1,37 @@
+program sincosprog
+
+implicit none
+integer :: i, npts
+real :: x, f_x, dx
+real, parameter :: pi = 4.0 * atan (1.0)
+real, parameter :: epsilon = [0:1.5]
+
+  print *,  'Dame el número de puntos en el intervalo npts= '
+  read(*,*) npts
+
+   dx = (2.0 * pi) /float(npts)
+   write(*,*) 'dx= ', dx
+ 
+
+  x = 0.0
+
+ open(unit=11, file='sincos.dat')
+
+  do i = 1 , npts+1, 1 
+
+     x = dx * float(i-1)
+
+     f_x = ((sin(x))**2)+((cos(x)**2))
+
+     write(*,*) x, f_x
+     write(11,*) x , f_x
+
+  enddo
+
+  if(abs(f_x) == epsilon) write (*,*) '(sin(x))**2)+((cos(x))**2) es i&
+       &gual a 1' 
+
+ close(11)
+
+end program sincosprog
+  

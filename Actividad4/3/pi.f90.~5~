@@ -1,0 +1,30 @@
+program pi
+
+implicit none
+integer :: i, npts
+real :: x, f_x, dx
+real, parameter :: pi = 4.0 * atan (1.0)
+
+ print *,  'Dame el número de puntos en el intervalo npts= '
+  read(*,*) npts
+
+   dx = (2.0 * pi) /float(npts)
+   write(*,*) 'dx= ', dx
+ 
+  x = 0.0
+
+ open(unit=11, file='arctan.dat')
+
+  do i = 1 , npts+1, 1 
+
+     x = 1.0
+
+     f_x = 4.0 * atan(x)
+
+     write(11,*) , x , f_x
+     if(abs(f_x) == pi) write(*,*) '4.0 * atan(x) cuando x = 1, es igu&
+          &al a pi'
+
+  enddo
+
+close(11)

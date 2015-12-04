@@ -1,0 +1,38 @@
+program sinf
+! tres espacios de sangria
+! sin suponer algo
+  implicit none
+ 
+
+  integer :: i, npts
+   real :: x, f_x,dx  
+   real, parameter :: pi = 4.0 * atan (1.0) 
+   real, parameter :: epsilon = 1.0E-6 
+
+  open(unit=11,file='seno.dat',Status='unknown')
+
+  print*, 'dame el número de puntos en el intervalo npts= '
+  read(*,*) npts
+
+  dx = (2.0 * pi)/float (npts)
+  write (*,*) 'dx = ', dx
+
+  x = 0.0
+
+     do i = 1, npts+1, 1 
+       x = dx * float(i-1)
+       f_x = sin(x)
+       write(*,*) i, x , f_x 
+       write(11,*) x , f_x
+       if (abs(f_x) .le. epsilon) write(*,*) 'x =', x, ' es un cero de la función'
+    enddo
+    ! finalizo el lop
+    do
+       i = 1 ,1 ,1
+
+       sintaylor = x - (x**3)/6.0
+       write(*,*) 'error porcentual con Taylor', (1-(sintaylor/&
+            & sin(x)))*100
+       ! calculamos el error porcentual de taylor
+    close(11)
+    end program sinf
